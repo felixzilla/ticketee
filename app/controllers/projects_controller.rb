@@ -18,11 +18,18 @@ class ProjectsController < ApplicationController
 
 		#save a new project
 		@project = Project.new(params[:project])
-		@project.save
+		
+		if @project.save
+			#show the user a success message
+			flash[:notice] = "Project has been created"
+			redirect_to @project
+		else
+			#show the user a success message
+		flash[:alert] = "Error Creating Project"
+		render :action => "new"
+		end
 
-		#show the user a success message
-		flash[:notice] = "Project has been created"
-		redirect_to @project
+		
 		
 	end
 
